@@ -360,7 +360,7 @@ export default function SignupPage() {
               <p className="text-sm text-zinc-500">
                 Already have one?{" "}
                 <a
-                  href="/login"
+                  href="/signin"
                   className="text-violet-400 hover:text-violet-300 transition-colors font-medium"
                 >
                   Sign in
