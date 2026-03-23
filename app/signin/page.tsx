@@ -128,15 +128,18 @@ function InputField({
 function SocialButton({
   icon,
   label,
+  onClick
 }: {
   icon: React.ReactNode;
   label: string;
+  onClick?: () => Promise<void> | void
 }) {
   return (
     <motion.button
       whileHover={{ y: -1 }}
       whileTap={{ scale: 0.98 }}
       type="button"
+      onClick={onClick}
       className="flex flex-1 items-center justify-center gap-2.5 rounded-xl border border-white/8 bg-white/4 py-3 text-sm text-zinc-400 hover:border-white/15 hover:bg-white/[0.07] hover:text-white transition-all duration-200"
     >
       {icon}
@@ -170,30 +173,42 @@ export default function SignInPage() {
     return e;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const errs = validate();
-    if (Object.keys(errs).length) {
-      setErrors(errs);
-      return;
-    }
-    setLoading(true);
-    const { data, error } = await authClient.signIn.email(
-      {
-        email: form.email,
-        password: form.password,
-        callbackURL: "/dashboard",
-        rememberMe: remember,
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  const errs = validate();
+  if (Object.keys(errs).length) {
+    setErrors(errs);
+    return;
+  }
+  setLoading(true);
+  const { data, error } = await authClient.signIn.email(
+    {
+      email: form.email,
+      password: form.password,
+      callbackURL: "/dashboard",
+      rememberMe: remember,
+    },
+    {
+      onError: (ctx) => {
+        alert(ctx.error.message);
       },
-      {
-        onError: (ctx) => {
-          alert(ctx.error.message);
-        },
-      },
-    );
-    setLoading(false);
-    setGlobalError("Incorrect email or password. Please try again.");
-  };
+    },
+  );
+  setLoading(false);
+  setGlobalError("Incorrect email or password. Please try again.");
+};
+
+const SignIn = async () => {
+  console.log("Google clicked");
+  try {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  } catch (err: any) {
+    console.error(err);
+    setGlobalError(err.message || "Google sign-in failed");
+  }
+};
 
   return (
     <div className="relative min-h-screen bg-[#080808] text-white antialiased overflow-x-hidden selection:bg-violet-500/30 selection:text-violet-200 flex flex-col items-center justify-center px-6 py-16">
@@ -257,6 +272,7 @@ export default function SignInPage() {
         <div className="flex gap-3 mb-6">
           <SocialButton
             label="Google"
+            onClick={SignIn}
             icon={
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none">
                 <path

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import * as Label from "@radix-ui/react-label";
 import * as Separator from "@radix-ui/react-separator";
 import * as Checkbox from "@radix-ui/react-checkbox";
-import { authClient } from "@/app/lib/auth-client";
+import { authClient, signIn } from "@/app/lib/auth-client";
 
 function GlowOrb({ className }: { className?: string }) {
   return (
@@ -121,15 +121,18 @@ function InputField({
 function SocialButton({
   icon,
   label,
+  onClick
 }: {
   icon: React.ReactNode;
   label: string;
+  onClick?: () => Promise<void> | void
 }) {
   return (
     <motion.button
       whileHover={{ y: -1 }}
       whileTap={{ scale: 0.98 }}
       type="button"
+      onClick={onClick}
       className="flex flex-1 items-center justify-center gap-2.5 rounded-xl border border-white/8 bg-white/4 py-3 text-sm text-zinc-400 hover:border-white/15 hover:bg-white/[0.07] hover:text-white transition-all duration-200"
     >
       {icon}
@@ -204,6 +207,7 @@ export default function SignupPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+    const [globalError, setGlobalError] = useState("");
 
   const set = (field: string) => (v: string) => {
     setForm((f) => ({ ...f, [field]: v }));
@@ -248,6 +252,18 @@ export default function SignupPage() {
       setSubmitted(true);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const SignIn = async () => {
+    console.log("Google clicked");
+    try {
+      await authClient.signIn.social({
+        provider: "google",
+      });
+    } catch (err: any) {
+      console.error(err);
+      setGlobalError(err.message || "Google sign-in failed");
     }
   };
 
@@ -372,6 +388,7 @@ export default function SignupPage() {
             <div className="flex gap-3 mb-6">
               <SocialButton
                 label="Google"
+                onClick={SignIn}
                 icon={
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none">
                     <path
