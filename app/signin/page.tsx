@@ -132,7 +132,7 @@ function SocialButton({
 }: {
   icon: React.ReactNode;
   label: string;
-  onClick?: () => Promise<void> | void
+  onClick?: any
 }) {
   return (
     <motion.button
@@ -198,15 +198,15 @@ const handleSubmit = async (e: React.FormEvent) => {
   setGlobalError("Incorrect email or password. Please try again.");
 };
 
-const SignIn = async () => {
-  console.log("Google clicked");
+const SignIn = async (provider: "google"| "github") => {
+  console.log(`${provider} clicked!`);
   try {
     await authClient.signIn.social({
-      provider: "google",
+      provider,
     });
   } catch (err: any) {
     console.error(err);
-    setGlobalError(err.message || "Google sign-in failed");
+    setGlobalError(err.message || `${provider} sign-in failed`);
   }
 };
 
@@ -272,7 +272,7 @@ const SignIn = async () => {
         <div className="flex gap-3 mb-6">
           <SocialButton
             label="Google"
-            onClick={SignIn}
+            onClick={() => SignIn("google")}
             icon={
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none">
                 <path
@@ -296,6 +296,7 @@ const SignIn = async () => {
           />
           <SocialButton
             label="GitHub"
+            onClick={() => SignIn("github")}
             icon={
               <svg
                 className="h-4 w-4 text-zinc-400"
