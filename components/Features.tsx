@@ -1,5 +1,5 @@
 import { motion, cubicBezier } from "framer-motion";
-import { FEATURES } from "../Data/Data";
+import { FEATURES } from "../app/Data/Data";
 import { Chip, fadeUp, GlowOrb, stagger } from "./Reusable/ReusableComponents";
 
 export default function Features() {
