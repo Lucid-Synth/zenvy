@@ -92,16 +92,16 @@ function UploadZone() {
             className={`flex flex-col items-center justify-center rounded-2xl border-2 border-dashed cursor-pointer transition-all py-16 px-8 text-center
               ${
                 state === "dragging"
-                  ? "border-zinc-500 bg-zinc-800/40"
+                  ? "border-zinc-400 bg-zinc-200 dark:border-zinc-700 dark:bg-zinc-800/40"
                   : state === "error"
-                    ? "border-red-500/40 bg-red-500/10"
-                    : "border-zinc-700 bg-zinc-900 hover:border-zinc-500 hover:bg-zinc-800"
+                  ? "border-red-500/40 bg-red-500/10"
+                  : "border-zinc-300 bg-zinc-100 hover:border-zinc-400 hover:bg-zinc-200 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:border-zinc-500 dark:hover:bg-zinc-800"
               }`}
           >
-            <p className="text-2xl font-semibold text-white mb-2">
+            <p className="text-2xl font-semibold text-zinc-900 dark:text-white mb-2">
               {state === "dragging" ? "Drop it!" : "Drop your image here"}
             </p>
-            <p className="text-sm text-zinc-500 mb-5">
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-5">
               PNG, JPG, WebP · Up to 25 MB
             </p>
 
@@ -111,7 +111,9 @@ function UploadZone() {
                 e.stopPropagation();
                 inputRef.current?.click();
               }}
-              className="rounded-full bg-zinc-200 text-black px-5 py-2 text-sm font-mono hover:bg-white transition"
+              className="rounded-full px-5 py-2 text-sm font-mono transition
+                bg-black text-white hover:bg-zinc-800
+                dark:bg-zinc-200 dark:text-black dark:hover:bg-white"
             >
               Upload image
             </Button>
@@ -121,21 +123,27 @@ function UploadZone() {
         {(state === "uploading" || state === "processing") && (
           <motion.div
             key="uploading"
-            className="flex flex-col items-center justify-center rounded-2xl border border-zinc-800 bg-zinc-900 py-16 px-8 text-center gap-6"
+            className="flex flex-col items-center justify-center rounded-2xl border py-16 px-8 text-center gap-6
+              bg-zinc-100 border-zinc-300
+              dark:bg-zinc-900 dark:border-zinc-800"
           >
-            <div className="text-white font-bold">{progress}%</div>
+            <div className="text-zinc-900 dark:text-white font-bold">
+              {progress}%
+            </div>
 
             <div>
-              <p className="text-sm text-white">
+              <p className="text-sm text-zinc-900 dark:text-white">
                 {state === "uploading" ? "Uploading…" : "Processing…"}
               </p>
-              <p className="text-xs text-zinc-500">{fileName}</p>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                {fileName}
+              </p>
             </div>
 
             <div className="w-full max-w-xs">
-              <Progress.Root className="h-1.5 w-full bg-zinc-800 rounded-full">
+              <Progress.Root className="h-1.5 w-full bg-zinc-300 dark:bg-zinc-800 rounded-full">
                 <Progress.Indicator
-                  className="h-full bg-white rounded-full"
+                  className="h-full bg-black dark:bg-white rounded-full"
                   style={{ width: `${progress}%` }}
                 />
               </Progress.Root>
@@ -146,13 +154,19 @@ function UploadZone() {
         {state === "done" && (
           <motion.div
             key="done"
-            className="flex flex-col items-center justify-center rounded-2xl border border-zinc-700 bg-zinc-900 py-12 px-8 text-center gap-5"
+            className="flex flex-col items-center justify-center rounded-2xl border py-12 px-8 text-center gap-5
+              bg-zinc-100 border-zinc-300
+              dark:bg-zinc-900 dark:border-zinc-700"
           >
-            <p className="text-white font-semibold">Done ✓</p>
+            <p className="text-zinc-900 dark:text-white font-semibold">
+              Done ✓
+            </p>
 
             <button
               onClick={reset}
-              className="rounded-full border border-zinc-700 px-5 py-2 text-xs text-zinc-400 hover:text-white hover:border-zinc-500 transition"
+              className="rounded-full border px-5 py-2 text-xs transition
+                border-zinc-300 text-zinc-600 hover:text-black hover:border-zinc-400
+                dark:border-zinc-700 dark:text-zinc-400 dark:hover:text-white dark:hover:border-zinc-500"
             >
               Upload another
             </button>
@@ -165,7 +179,10 @@ function UploadZone() {
 
 export default function Page() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[#111111] text-white px-6">
+    <div className="flex items-center justify-center min-h-screen px-6
+      bg-white text-black
+      dark:bg-[#111111] dark:text-white"
+    >
       <UploadZone />
     </div>
   );
