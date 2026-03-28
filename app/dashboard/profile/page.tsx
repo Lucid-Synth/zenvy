@@ -1,17 +1,16 @@
-import { headers } from "next/headers";
 import { auth } from "@/app/lib/auth";
+import { headers } from "next/headers";
+import ProfileCard from "@/components/ProfileCard";
 import { redirect } from "next/navigation";
-import UploadZoneClient from "@/components/UploadZoneClient";
 
 export default async function Page() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
-  // 🔐 PROTECT ROUTE
-  if (!session) {
-    redirect("/unauthorized");
+  if(!session){
+    redirect('/unauthorized');
   }
-  
-  return <UploadZoneClient />;
+
+  return <ProfileCard user={session.user} />;
 }
