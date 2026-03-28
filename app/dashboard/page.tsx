@@ -13,7 +13,7 @@ type UploadState =
   | "done"
   | "error";
 
-async function UploadZone() {
+function UploadZone() {
   const [state, setState] = useState<UploadState>("idle");
   const [progress, setProgress] = useState(0);
   const [fileName, setFileName] = useState("");
