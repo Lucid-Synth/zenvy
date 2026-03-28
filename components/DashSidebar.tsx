@@ -44,7 +44,7 @@ const items = [
 
 async function DashSidebar() {
   const session = await auth.api.getSession({
-    headers: await headers(), // headers containing the user's session token
+    headers: await headers(), 
   });
   return (
     <Sidebar

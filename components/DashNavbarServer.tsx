@@ -8,7 +8,6 @@ export default async function DashNavbarServer() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  console.log(session)
 
   return <DashNavbar session={session} />;
 }
