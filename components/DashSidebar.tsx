@@ -1,13 +1,4 @@
-import {
-  Home,
-  Inbox,
-  Calendar,
-  Search,
-  Settings,
-  User2,
-  ChevronUp,
-  Receipt,
-} from "lucide-react";
+import { Home, Settings, User2, ChevronUp, Receipt } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -17,7 +8,6 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarSeparator,
@@ -29,6 +19,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+
+import { auth } from "@/app/lib/auth";
+import { headers } from "next/headers";
 
 import Logo from "./Reusable/Logo";
 const items = [
@@ -49,7 +42,10 @@ const items = [
   },
 ];
 
-function DashSidebar() {
+async function DashSidebar() {
+  const session = await auth.api.getSession({
+    headers: await headers(), // headers containing the user's session token
+  });
   return (
     <Sidebar
       collapsible="icon"
@@ -68,7 +64,7 @@ function DashSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-        <SidebarSeparator />
+          <SidebarSeparator />
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -94,7 +90,7 @@ function DashSidebar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton>
-                  <User2 /> Ujjwal Anand <ChevronUp />
+                  <User2 /> {session?.user.name} <ChevronUp />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-40">

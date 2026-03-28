@@ -4,7 +4,7 @@ const Logo = () => {
       <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-linear-to-br from-[#a78bfa] to-[#6366f1] text-white text-[10px] font-black">
         Z
       </span>
-      <span className="font-semibold text-white text-sm">Zenvy</span>
+      <span className="font-semibold font-mono dark:text-white text-black text-lg">Zenvy</span>
     </div>
   );
 };

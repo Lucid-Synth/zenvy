@@ -1,4 +1,7 @@
+// components/DashNavbar.tsx
+
 "use client";
+
 import { LogOut, Moon, Settings, Sun, User } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -14,26 +17,25 @@ import {
 import { useTheme } from "next-themes";
 import { SidebarTrigger } from "./ui/sidebar";
 
-function DashNavbar() {
-  const { theme, setTheme } = useTheme();
+export default function DashNavbar({ session }: { session: any }) {
+  const { setTheme } = useTheme();
+
   return (
-    <nav
-      className="p-3 flex items-center justify-between
-  bg-white/80 dark:bg-[#111111]/80
-  backdrop-blur-xl
-  border-b border-zinc-200 dark:border-zinc-800"
-    >
+    <nav className="p-3 flex items-center justify-between bg-white/80 dark:bg-[#111111]/80 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800">
       <SidebarTrigger />
+
       <div className="flex items-center gap-4">
         <Link href="/">Dashboard</Link>
+
+        {/* Theme toggle */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon">
-              <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-              <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-              <span className="sr-only">Toggle theme</span>
+              <Sun className="h-[1.2rem] w-[1.2rem] dark:scale-0 dark:-rotate-90 transition-all" />
+              <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 dark:scale-100 dark:rotate-0 transition-all" />
             </Button>
           </DropdownMenuTrigger>
+
           <DropdownMenuContent align="end">
             <DropdownMenuItem onClick={() => setTheme("light")}>
               Light
@@ -47,26 +49,35 @@ function DashNavbar() {
           </DropdownMenuContent>
         </DropdownMenu>
 
+        {/* User menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar>
-              <AvatarImage src="https://avatars.githubusercontent.com/u/201602934?v=4" />
-              <AvatarFallback>LS</AvatarFallback>
+              <AvatarImage src={session?.user?.image || ""} />
+              <AvatarFallback>
+                {session?.user?.email?.[0]?.toUpperCase() || "U"}
+              </AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
+
           <DropdownMenuContent sideOffset={10}>
             <DropdownMenuGroup>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>
+                {session?.user?.email}
+              </DropdownMenuLabel>
+
               <DropdownMenuItem>
-                <User className="h-[1.2rem] w-[1.2rem] mr-2" />
+                <User className="mr-2 h-4 w-4" />
                 Profile
               </DropdownMenuItem>
+
               <DropdownMenuItem>
-                <Settings className="h-[1.2rem] w-[1.2rem] mr-2" />
-                Setting
+                <Settings className="mr-2 h-4 w-4" />
+                Settings
               </DropdownMenuItem>
+
               <DropdownMenuItem variant="destructive">
-                <LogOut className="h-[1.2rem] w-[1.2rem] mr-2" />
+                <LogOut className="mr-2 h-4 w-4" />
                 Logout
               </DropdownMenuItem>
             </DropdownMenuGroup>
@@ -76,5 +87,3 @@ function DashNavbar() {
     </nav>
   );
 }
-
-export default DashNavbar;

@@ -1,8 +1,6 @@
-
-import DashNavbar from "@/components/DashNavbar";
+import DashNavbarServer from "@/components/DashNavbarServer";
 import DashSidebar from "@/components/DashSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -22,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning className="light">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -31,11 +29,12 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
+          enableColorScheme
         >
           <SidebarProvider >
             <DashSidebar />
             <main className="w-full">
-              <DashNavbar />
+              <DashNavbarServer />
               <div>{children}</div>
             </main>
           </SidebarProvider>

@@ -203,6 +203,7 @@ const SignIn = async (provider: "google"| "github") => {
   try {
     await authClient.signIn.social({
       provider,
+      callbackURL: '/dashboard'
     });
   } catch (err: any) {
     console.error(err);
