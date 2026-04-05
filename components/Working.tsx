@@ -9,7 +9,7 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="relative py-32 px-6 overflow-hidden">
+    <section id="workflow" className="relative py-32 px-6 overflow-hidden">
       <GlowOrb className="h-75 w-75 bg-purple-700 -left-20 top-1/2 -translate-y-1/2" />
 
       <div className="mx-auto max-w-6xl">

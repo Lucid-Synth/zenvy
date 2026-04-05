@@ -23,7 +23,7 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <nav className="hidden md:flex items-center gap-8 text-sm text-zinc-400">
-          {["Features", "Pricing", "Docs", "Blog"].map((l) => (
+          {["Features", "Pricing", "Workflow"].map((l) => (
             <a
               key={l}
               href={`#${l.toLowerCase()}`}
@@ -121,7 +121,7 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -8 }}
             className="md:hidden border-t border-white/5 bg-[#0a0a0a]/95 backdrop-blur-xl px-6 pb-6 pt-4 space-y-4"
           >
-            {["Features", "Pricing", "Docs", "Blog"].map((l) => (
+            {["Features", "Pricing","Workflow"].map((l) => (
               <a
                 key={l}
                 href={`#${l.toLowerCase()}`}
