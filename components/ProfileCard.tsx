@@ -5,7 +5,7 @@ import { BadgeCheck, Mail, Calendar, User } from "lucide-react";
 
 export default function ProfileCard({ user }: { user: any }) {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center px-6
+    <div className="min-h-screen w-full flex items-start pt-10 justify-center px-6
       bg-white text-black
       dark:bg-[#111111] dark:text-white"
     >
@@ -80,13 +80,13 @@ export default function ProfileCard({ user }: { user: any }) {
           </div>
         </div>
 
-        {/* Actions */}
+
         <div className="mt-8 flex gap-3">
           <button className="flex-1 rounded-xl py-2 text-sm font-medium
-            bg-black text-white hover:bg-zinc-800
-            dark:bg-white dark:text-black dark:hover:bg-zinc-200"
+            bg-red-500 text-white hover:bg-red-400
+            dark:bg-red-500 dark:text-black dark:hover:bg-red-400"
           >
-            Edit Profile
+            Sign out
           </button>
 
           <button className="flex-1 rounded-xl py-2 text-sm font-medium border

@@ -68,7 +68,7 @@ export default function DashNavbar({ session }: { session: any }) {
 
               <DropdownMenuItem>
                 <User className="mr-2 h-4 w-4" />
-                Profile
+                <Link href='/dashboard/profile'>Profile</Link>
               </DropdownMenuItem>
 
               <DropdownMenuItem>
