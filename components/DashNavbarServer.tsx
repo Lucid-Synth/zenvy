@@ -1,13 +1,21 @@
-// components/DashNavbarServer.tsx
-
 import { headers } from "next/headers";
 import { auth } from "@/app/lib/auth";
 import DashNavbar from "./DashNavbar";
 
 export default async function DashNavbarServer() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
-  return <DashNavbar session={session} />;
+    if (!session) {
+      return <DashNavbar session={null} />;
+    }
+
+    return <DashNavbar session={session} />;
+  } catch (error) {
+    console.error("Error fetching session:", error);
+
+    return <DashNavbar session={null} />;
+  }
 }

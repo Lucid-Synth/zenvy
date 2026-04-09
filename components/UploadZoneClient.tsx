@@ -27,21 +27,30 @@ function UploadZone() {
 
     setFileName(file.name);
     setState("uploading");
-    setProgress(0);
+    setProgress(10);
 
-    for (let i = 0; i <= 60; i += 10) {
-      await new Promise((r) => setTimeout(r, 80));
-      setProgress(i);
+    try{
+      const formData = new FormData();
+      formData.append("file",file);
+
+      const res = await fetch("/api/upload",{
+        method: "POST",
+        body: formData
+      })
+
+      setProgress(60);
+      setState("processing");
+
+      const data = await res.json();
+
+      setProgress(100);
+      setState("done");
+
+      console.log("Processed Image URL: ", data.url)
+    }catch(error){
+      console.log(error);
+      setState("error")
     }
-
-    setState("processing");
-
-    for (let i = 60; i <= 100; i += 5) {
-      await new Promise((r) => setTimeout(r, 60));
-      setProgress(i);
-    }
-
-    setState("done");
   }, []);
 
   const handleDrop = useCallback(
