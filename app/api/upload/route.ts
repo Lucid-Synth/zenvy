@@ -32,8 +32,14 @@ export async function POST(req: Request) {
 
     const uploaded = result as any;
 
-    
-    return NextResponse.json({ url: uploaded });
+    const processedUrl = cloudinary.url(uploaded.public_id, {
+      transformation: [
+        { effect: "background_removal" },
+        { format: "png" }
+      ]
+    })
+
+    return NextResponse.json({ url: processedUrl }, { status:200 });
   } catch (error) {
     return NextResponse.json({ error: "Upload failed" }, { status: 500 });
   }

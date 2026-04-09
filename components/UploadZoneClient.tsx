@@ -17,6 +17,7 @@ function UploadZone() {
   const [state, setState] = useState<UploadState>("idle");
   const [progress, setProgress] = useState(0);
   const [fileName, setFileName] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const processFile = useCallback(async (file: File) => {
@@ -29,14 +30,14 @@ function UploadZone() {
     setState("uploading");
     setProgress(10);
 
-    try{
+    try {
       const formData = new FormData();
-      formData.append("file",file);
+      formData.append("file", file);
 
-      const res = await fetch("/api/upload",{
+      const res = await fetch("/api/upload", {
         method: "POST",
-        body: formData
-      })
+        body: formData,
+      });
 
       setProgress(60);
       setState("processing");
@@ -46,10 +47,12 @@ function UploadZone() {
       setProgress(100);
       setState("done");
 
-      console.log("Processed Image URL: ", data.url)
-    }catch(error){
+      console.log("Processed Image URL: ", data.url);
+
+      setImageUrl(data.url);
+    } catch (error) {
       console.log(error);
-      setState("error")
+      setState("error");
     }
   }, []);
 
@@ -73,7 +76,6 @@ function UploadZone() {
     setProgress(0);
     setFileName("");
   };
-
 
   return (
     <div className="relative w-full max-w-xl">
@@ -104,8 +106,8 @@ function UploadZone() {
                 state === "dragging"
                   ? "border-zinc-400 bg-zinc-200 dark:border-zinc-700 dark:bg-zinc-800/40"
                   : state === "error"
-                  ? "border-red-500/40 bg-red-500/10"
-                  : "border-zinc-300 bg-zinc-100 hover:border-zinc-400 hover:bg-zinc-200 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:border-zinc-500 dark:hover:bg-zinc-800"
+                    ? "border-red-500/40 bg-red-500/10"
+                    : "border-zinc-300 bg-zinc-100 hover:border-zinc-400 hover:bg-zinc-200 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:border-zinc-500 dark:hover:bg-zinc-800"
               }`}
           >
             <p className="text-2xl font-semibold text-zinc-900 dark:text-white mb-2">
@@ -183,13 +185,32 @@ function UploadZone() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {imageUrl && (
+        <div className="flex flex-col items-center gap-3">
+          <img
+            src={imageUrl}
+            alt="Processed"
+            className="max-w-xs rounded-lg shadow"
+          />
+
+          <a
+            href={imageUrl}
+            download
+            className="text-sm px-4 py-2 bg-black text-white rounded-full"
+          >
+            Download Image
+          </a>
+        </div>
+      )}
     </div>
   );
 }
 
 export default function Page() {
   return (
-    <div className="flex items-center justify-center min-h-screen px-6
+    <div
+      className="flex items-center justify-center min-h-screen px-6
       bg-white text-black
       dark:bg-[#111111] dark:text-white"
     >
