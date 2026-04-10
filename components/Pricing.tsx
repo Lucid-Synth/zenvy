@@ -10,7 +10,6 @@ export default function Pricing() {
       "HD resolution",
       "PNG export",
     ],
-    cta: "Join the waitlist",
   };
 
   return (
@@ -101,10 +100,10 @@ export default function Pricing() {
 
             {/* CTA */}
             <a
-              href="/waitlist"
+              href="/signup"
               className="mt-4 rounded-full py-3 text-center text-sm font-semibold bg-violet-600 text-white hover:bg-violet-500 transition-all duration-200 shadow-[0_0_20px_rgba(139,92,246,0.4)]"
             >
-              {PLAN.cta}
+              Start for free
             </a>
           </motion.div>
         </motion.div>

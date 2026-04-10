@@ -63,14 +63,14 @@ export default function Hero() {
           className="flex flex-wrap items-center justify-center gap-3"
         >
           <a
-            href="/waitlist"
+            href="/signup"
             className="group relative inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-sm font-semibold text-zinc-900 hover:bg-zinc-100 transition-all duration-200 shadow-[0_0_30px_rgba(139,92,246,0.4)]"
           >
             Start for free
             <svg className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </a>
           <a
-            href="#"
+            href="#workflow"
             className="inline-flex h-12 items-center gap-2 rounded-full border border-white/10 bg-white/5 px-7 text-sm font-medium text-zinc-300 hover:bg-white/10 hover:text-white transition-all duration-200"
           >
             See how it works
@@ -84,7 +84,7 @@ export default function Hero() {
           custom={4}
           className="text-xs text-zinc-600"
         >
-          No credit card required · 50 free images/month · Cancel anytime
+          No credit card required · Free background removal · Temporary stored
         </motion.p>
       </motion.div>
 

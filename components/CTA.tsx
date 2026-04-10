@@ -21,17 +21,12 @@ export default function CTA() {
         </p>
         <div className="flex flex-wrap justify-center gap-3">
           <a
-            href="/waitlist"
+            href="/signup"
             className="rounded-full bg-white px-8 py-3 text-sm font-semibold text-zinc-900 hover:bg-zinc-100 transition-colors shadow-[0_0_30px_rgba(139,92,246,0.4)]"
           >
             Get started free
           </a>
-          <a
-            href="/waitlist"
-            className="rounded-full border border-white/10 bg-white/5 px-8 py-3 text-sm font-medium text-zinc-300 hover:bg-white/10 hover:text-white transition-all"
-          >
-            View docs →
-          </a>
+
         </div>
         <p className="mt-6 text-xs text-zinc-700">No credit card · Free forever plan · SOC 2 compliant</p>
       </motion.div>

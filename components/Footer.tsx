@@ -9,8 +9,8 @@ export default function Footer() {
           <span className="font-semibold text-white">Zenvy</span>
         </div>
         <div className="flex flex-wrap justify-center gap-6 text-xs text-zinc-600">
-          {["Privacy", "Terms", "Status", "Docs", "Twitter", "GitHub"].map((l) => (
-            <a key={l} href="#" className="hover:text-zinc-400 transition-colors">{l}</a>
+          {["Terms & Condition"].map((l) => (
+            <a key={l} href="/terms" className="hover:text-zinc-400 transition-colors">{l}</a>
           ))}
         </div>
         <p className="text-xs text-zinc-700">© {new Date().getFullYear()} Zenvy, Inc.</p>

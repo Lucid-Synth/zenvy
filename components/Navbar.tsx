@@ -12,7 +12,7 @@ export default function Navbar() {
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         {/* Logo */}
-        <a href="#" className="group flex items-center gap-2">
+        <a href="/" className="group flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center rounded-md bg-linear-to-br from-[#a78bfa] to-[#6366f1] text-white text-sm font-black">
             Z
           </span>
@@ -37,13 +37,13 @@ export default function Navbar() {
         {/* CTAs */}
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="/waitlist"
+            href="/signin"
             className="text-sm text-zinc-400 hover:text-white transition-colors"
           >
             Sign in
           </a>
           <a
-            href="/waitlist"
+            href="/signup"
             className="rounded-full bg-white px-4 py-1.5 text-sm font-semibold text-zinc-900 hover:bg-zinc-100 transition-colors"
           >
             Try free
@@ -132,7 +132,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="http://localhost:3000/waitlist"
+              href="/signup"
               className="block rounded-full bg-white text-center px-4 py-2 text-sm font-semibold text-zinc-900"
             >
               Try free
