@@ -1,4 +1,10 @@
-import { Home, Settings, User2, ChevronUp, Receipt, User, Paperclip, Handshake } from "lucide-react";
+import {
+  Home,
+  User2,
+  ChevronUp,
+  User,
+  Handshake,
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -24,6 +30,7 @@ import { auth } from "@/app/lib/auth";
 import { headers } from "next/headers";
 
 import Logo from "./Reusable/Logo";
+import { authClient } from "@/app/lib/auth-client";
 const items = [
   {
     title: "Home",
@@ -38,14 +45,15 @@ const items = [
   {
     title: "Terms & Condition",
     url: "/dashboard/terms",
-    icon: Handshake ,
+    icon: Handshake,
   },
 ];
 
 async function DashSidebar() {
   const session = await auth.api.getSession({
-    headers: await headers(), 
+    headers: await headers(),
   });
+
   return (
     <Sidebar
       collapsible="icon"
@@ -72,7 +80,7 @@ async function DashSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <Link href={item.url}>
-                      <item.icon size={48}/>
+                      <item.icon size={48} />
                       <span className="text-lg">{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
@@ -94,9 +102,8 @@ async function DashSidebar() {
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-40">
-                <DropdownMenuItem><Link href='/dashboard/profile'>Account</Link></DropdownMenuItem>
-                <DropdownMenuItem variant="destructive">
-                  Sign out
+                <DropdownMenuItem>
+                  <Link href="/dashboard/profile">Account</Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

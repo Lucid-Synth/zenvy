@@ -1,9 +1,23 @@
 "use client";
 
+import { authClient } from "@/app/lib/auth-client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BadgeCheck, Mail, Calendar, User } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function ProfileCard({ user }: { user: any }) {
+    const router = useRouter();
+  
+    const handleSignout = async () => {
+      try {
+        await authClient.signOut();
+        router.push("/");
+        router.refresh();
+      } catch (error) {
+        console.error("Logout failed:", error);
+      }
+    };
+
   return (
     <div className="min-h-screen w-full flex items-start pt-10 justify-center px-6
       bg-white text-black
@@ -85,6 +99,7 @@ export default function ProfileCard({ user }: { user: any }) {
           <button className="flex-1 rounded-xl py-2 text-sm font-medium
             bg-red-500 text-white hover:bg-red-400
             dark:bg-red-500 dark:text-black dark:hover:bg-red-400"
+            onClick={handleSignout}
           >
             Sign out
           </button>

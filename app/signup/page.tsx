@@ -239,6 +239,7 @@ export default function SignupPage() {
           email: form.email,
           password: form.password,
           name: form.name,
+          callbackURL: "/dashboard",
         },
         {
           onError: (ctx) => {
@@ -260,6 +261,7 @@ export default function SignupPage() {
     try {
       await authClient.signIn.social({
         provider,
+        callbackURL: "/dashboard",
       });
     } catch (err: any) {
       console.error(err);

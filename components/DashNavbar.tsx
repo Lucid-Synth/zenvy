@@ -1,5 +1,3 @@
-// components/DashNavbar.tsx
-
 "use client";
 
 import { LogOut, Moon, Settings, Sun, User } from "lucide-react";
@@ -16,10 +14,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useTheme } from "next-themes";
 import { SidebarTrigger } from "./ui/sidebar";
+import { authClient } from "@/app/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 export default function DashNavbar({ session }: { session: any }) {
   const { setTheme } = useTheme();
+  const router = useRouter();
 
+  const handleSignout = async () => {
+    try {
+      await authClient.signOut();
+      router.push("/");
+      router.refresh();
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
   return (
     <nav className="p-3 flex items-center justify-between bg-white/80 dark:bg-[#111111]/80 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800">
       <SidebarTrigger />
@@ -71,9 +81,9 @@ export default function DashNavbar({ session }: { session: any }) {
                 <Link href='/dashboard/profile'>Profile</Link>
               </DropdownMenuItem>
 
-              <DropdownMenuItem variant="destructive">
+              <DropdownMenuItem variant="destructive" onClick={handleSignout}>
                 <LogOut className="mr-2 h-4 w-4" />
-                Logout
+                SignOut
               </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
