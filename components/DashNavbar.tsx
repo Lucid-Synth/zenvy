@@ -71,11 +71,6 @@ export default function DashNavbar({ session }: { session: any }) {
                 <Link href='/dashboard/profile'>Profile</Link>
               </DropdownMenuItem>
 
-              <DropdownMenuItem>
-                <Settings className="mr-2 h-4 w-4" />
-                Settings
-              </DropdownMenuItem>
-
               <DropdownMenuItem variant="destructive">
                 <LogOut className="mr-2 h-4 w-4" />
                 Logout

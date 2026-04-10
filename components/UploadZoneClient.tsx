@@ -77,6 +77,19 @@ function UploadZone() {
     setFileName("");
   };
 
+  const handleDownload = async () => {
+    const res = await fetch(imageUrl);
+    const blob = await res.blob();
+
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${Date.now}.png`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  };
+
   return (
     <div className="relative w-full max-w-xl">
       <input
@@ -187,17 +200,14 @@ function UploadZone() {
       </AnimatePresence>
 
       {imageUrl && (
-        <div className="flex flex-col items-center gap-3">
-          <img
-            src={imageUrl}
-            alt="Processed"
-            className="max-w-xs rounded-lg shadow"
-          />
-
+        <div className="flex flex-col items-center gap-3 mt-6">
+          <p className="text-sm font-semibold text-green-500 px-3 py-1 rounded-full">
+            Your file is ready !!
+          </p>
           <a
-            href={imageUrl}
+            onClick={handleDownload}
             download
-            className="text-sm px-4 py-2 bg-black text-white rounded-full"
+            className="text-sm px-4 py-2 rounded-full bg-zinc-900 text-white hover:bg-zinc-700 dark:bg-zinc-200 dark:text-black dark:hover:bg-white transition"
           >
             Download Image
           </a>

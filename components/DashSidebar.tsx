@@ -1,4 +1,4 @@
-import { Home, Settings, User2, ChevronUp, Receipt, User } from "lucide-react";
+import { Home, Settings, User2, ChevronUp, Receipt, User, Paperclip, Handshake } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -36,9 +36,9 @@ const items = [
     icon: User,
   },
   {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
+    title: "Terms & Condition",
+    url: "/dashboard/terms",
+    icon: Handshake ,
   },
 ];
 
@@ -95,7 +95,6 @@ async function DashSidebar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-40">
                 <DropdownMenuItem><Link href='/dashboard/profile'>Account</Link></DropdownMenuItem>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
                 <DropdownMenuItem variant="destructive">
                   Sign out
                 </DropdownMenuItem>

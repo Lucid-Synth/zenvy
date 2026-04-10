@@ -580,16 +580,8 @@ export default function SignupPage() {
                       href="#"
                       className="text-violet-400 hover:text-violet-300 transition-colors"
                     >
-                      Terms of Service
-                    </a>{" "}
-                    and{" "}
-                    <a
-                      href="#"
-                      className="text-violet-400 hover:text-violet-300 transition-colors"
-                    >
-                      Privacy Policy
+                      Terms & Condition
                     </a>
-                    .
                   </label>
                 </div>
                 <AnimatePresence>
@@ -696,19 +688,12 @@ export default function SignupPage() {
 
             {/* Footer note */}
             <p className="mt-5 text-center text-[11px] text-zinc-700 leading-relaxed">
-              Protected by reCAPTCHA · Google{" "}
+              Protected by reCAPTCHA ·{" "}
               <a
-                href="#"
+                href="/terms"
                 className="underline underline-offset-2 hover:text-zinc-500 transition-colors"
               >
-                Privacy
-              </a>{" "}
-              ·{" "}
-              <a
-                href="#"
-                className="underline underline-offset-2 hover:text-zinc-500 transition-colors"
-              >
-                Terms
+                Terms & Condition
               </a>
             </p>
           </motion.div>
